@@ -3,16 +3,16 @@ version: '2'
 services:
 
   deployment1:
-    image: tomcat:9
+    image: gireeshgg/tomguns:latest
     ports:
       - "8081:8080"
-    container_name: tomcat1
+    container_name: app1
 
   deployment2:
-    image: tomcat:8
+    image: gireeshgg/tomguns:latest
     ports:
       - "8082:8080"
-    container_name: tomcat2
+    container_name: app2
 
   web:
     image: nginx
