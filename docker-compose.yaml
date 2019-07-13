@@ -5,7 +5,7 @@ services:
   deployment1:
     image: gireeshgg/tomguns:latest
     ports:
-      - "8081:8080"
+      - "8083:8080"
     container_name: app1
 
   deployment2:
