@@ -20,8 +20,15 @@ spec:
     spec:
       containers:
         - name: app
-          image: gireeshgg/tomguns:76
+          image: gireeshgg/tomguns:77
           imagePullPolicy: Always
+          env:
+            - name: DATABASE_URL
+              value: database
+            - name: DATABASE_USERNAME
+              value: root
+            - name: DATABASE_PASSWORD
+              value: root
           ports:
             - containerPort: 8080
               protocol: TCP
