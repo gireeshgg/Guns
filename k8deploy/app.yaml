@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gunsui
+spec:
+  replicas: 2
+  minReadySeconds: 20
+  selector:
+    matchLabels:
+      role: gunsroleui
+    matchExpressions:
+      - {key: version, operator: In, values: [v1, v2, v3]}
+  template:
+    metadata:
+      name: gunsui
+      labels:
+        app: java
+        role: gunsroleui
+        version: v1
+    spec:
+      containers:
+        - name: app
+          image: gireeshgg/guns:56
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+              tcpSocket:
+                port: 8080
+              initialDelaySeconds: 20
+              periodSeconds: 20
+          readinessProbe:
+              tcpSocket:
+                port: 8080
+              initialDelaySeconds: 5
+              periodSeconds: 5
+
