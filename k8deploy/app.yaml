@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: gireeshgg/tomguns:$IMAGE_TAG
+          image: gireeshgg/tomguns:0
           imagePullPolicy: Always
           env:
             - name: DATABASE_URL
