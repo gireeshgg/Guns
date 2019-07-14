@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: database
+  labels:
+    app: mysql
+    role: gunsroledb
+    version: v1
+spec:
+  containers:
+    - name: database
+      image: gireeshgg/gunsmysql:BUID_NUMBER
+      ports:
+        - containerPort: 3306
+      volumeMounts:
+        - name: db-database
+          mountPath: /var/lib/mysql
+  nodeSelector:
+        zone: 'node3'
+  volumes:
+  - name: db-database
+    hostPath:
+      path: /var/data
+      type: DirectoryOrCreate
