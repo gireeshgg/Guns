@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: gireeshgg/guns:73
+          image: gireeshgg/tomguns:73
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
