@@ -1,24 +1,44 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: database
-  labels:
-    app: mysql
-    role: gunsroledb
-    version: v1
 spec:
-  containers:
-    - name: database
-      image: gireeshgg/editedforgunsmysql
-      ports:
-        - containerPort: 3306
-      volumeMounts:
+  replicas: 2
+  selector:
+    matchLabels:
+      role: gunsroledb
+  strategy:
+      type: Recreate
+  template:
+      metadata:
+        labels:
+          role: gunsroledb
+      spec:
+        containers:
+        - name: database
+          image: mysql:5.7
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: password
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: db-database
+              mountPath: /var/lib/mysql
+            - name: db-init
+              mountPath: /docker-entrypoint-initdb.d
+        nodeSelector:
+           zone: 'node3'
+        volumes:
         - name: db-database
-          mountPath: /var/lib/mysql
-  nodeSelector:
-        zone: 'node3'
-  volumes:
-  - name: db-database
-    hostPath:
-      path: /var/data
-      type: DirectoryOrCreate
+          hostPath:
+            path: /var/data
+            type: DirectoryOrCreate
+        - name: db-init
+          hostPath:
+            path: /var/mysldata/init
+            type: DirectoryOrCreate
+                                         
