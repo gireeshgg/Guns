@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
     - name: database
-      image: gireeshgg/gunsmysql:BUID_NUMBER
+      image: gireeshgg/editedformysql
       ports:
         - containerPort: 3306
       volumeMounts:
