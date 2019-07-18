@@ -14,9 +14,13 @@ services:
     depends_on:
       - database
   database:
-    image: srinivasbv22/gunsmysql
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=guns
+      - MYSQL_ROOT_PASSWORD=root
+    
     ports:
       - "8082:3306"
     volumes:
       - /var/lib/data_storage:/var/lib/mysql
-      - /var/mysqldata/init:/docker-entrypoint-initdb.d
+      - /var/mysqldata:/docker-entrypoint-initdb.d
