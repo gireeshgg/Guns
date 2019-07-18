@@ -32,5 +32,5 @@
         mode: '0644'
     - name: Deploying application
       shell: docker-compose up -d
-    - name: allowing ingress in 8081
-      shell: apt install ufw -y && ufw allow 8081
+    - name: allowing ingress in 80
+      shell: apt install ufw -y && ufw allow 80 && ufw allow 8080
