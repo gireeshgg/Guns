@@ -39,28 +39,7 @@ resource "aws_instance" "web" {
         instance_type = "t2.micro"
         key_name = "${var.key_name}"
         vpc_security_group_ids = ["${aws_security_group.default.id}"]
-
-         provisioner "file" {
-                source = "/var/mysqldata/init.zip"
-                destination = "/tmp/data_storage.zip"
-        }
-
-        provisioner "remote-exec" {
-                inline = [
-                "sudo apt install unzip",
-                ]
-        }
-
-        provisioner "remote-exec" {
-                inline = [
-                "unzip /tmp/data_storage.zip",
-                ]
-        }
-
-        connection {
-                user = "ubuntu"
-                private_key="${file("/home/devopsinfra/.ssh/terraform.pem")}"
-        }
+        
         tags = {
                Name = "Gireesh"
         }
