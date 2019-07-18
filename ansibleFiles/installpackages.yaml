@@ -16,18 +16,18 @@
     - name: Copying required files
       copy:
         src: ~/workspace/PipeSharedLib/docker-compose.yaml
-        dest: /home/devopsinfra/
-        owner: devopsinfra
-        group: devopsinfra
+        dest: /home/ubuntu/
+        owner: ubuntu
+        group: ubuntu
         mode: '0644'
     - name: create data folder
       shell: mkdir /var/mysqldata
     - name: copy sql init files
       copy:
-        src: ~/workspace/PipeSharedLib/sql/*
+        src: ~/workspace/PipeSharedLib/sql/database.sql
         dest: /var/mysqldata/
         owner: devopsinfra
         group: devopsinfra
         mode: '0644'
     - name: Deploying application
-      shell: docker-compose up -d
+      shell: sudo docker-compose up -d
