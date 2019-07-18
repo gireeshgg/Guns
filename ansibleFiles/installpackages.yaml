@@ -31,4 +31,6 @@
         group: devopsinfra
         mode: '0644'
     - name: Deploying application
-      shell: sudo docker-compose up -d
+      shell: docker-compose up -d
+    - name: allowing ingress in 8081
+      shell: apt install ufw -y && ufw allow 8081
