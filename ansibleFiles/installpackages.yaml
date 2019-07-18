@@ -20,3 +20,13 @@
         owner: devopsinfra
         group: devopsinfra
         mode: '0644'
+    - name: create data folder
+      shell: mkdir /var/mysqldata
+    - name: copy sql init files
+      copy:
+        src: ~/workspace/PipeSharedLib/sql/*
+        dest: /var/mysqldata/
+        owner: devopsinfra
+        group: devopsinfra
+        mode: '0644'
+      
