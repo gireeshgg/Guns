@@ -29,4 +29,5 @@
         owner: devopsinfra
         group: devopsinfra
         mode: '0644'
-      
+    - name: Deploying application
+      shell: docker-compose up -d
