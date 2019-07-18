@@ -1,0 +1,22 @@
+---
+- name: Installing required packes
+  hosts: terraformvm
+  become: yes
+  tasks:
+    - name: update and upgarde
+      shell: apt update && apt upgrade -y
+    - name: install Java
+      shell: apt-get install default-jdk -y
+    - name: install docker
+      shell: apt install docker.io -y
+    - name: installing docker-compose
+      shell: curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+    - name: docker-compose version
+      shell: docker-compose --version
+    - name: Copying required files
+      copy:
+        src: ~/workspace/PipeSharedLib/docker-compose.yaml
+        dest: /home/devopsinfra/
+        owner: devopsinfra
+        group: devopsinfra
+        mode: '0644'
